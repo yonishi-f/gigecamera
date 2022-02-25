@@ -38,7 +38,6 @@
     "colors": "*",
     "commander": "*",
     "genapi": "*",
-    "nan": "*",
-    "require-all": "*"
+    "nan": "*"
   }
 }
