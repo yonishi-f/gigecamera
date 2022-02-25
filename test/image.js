@@ -1,6 +1,4 @@
 var Device = require("../lib/classes/Device").Device;
-var opencv = require('opencv');
-var fs = require('fs');
 
 var device = new Device();
 

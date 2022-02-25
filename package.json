@@ -39,7 +39,6 @@
     "commander": "*",
     "genapi": "*",
     "nan": "*",
-    "opencv": "^7.0.0",
     "require-all": "*"
   }
 }
