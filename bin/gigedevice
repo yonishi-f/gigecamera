@@ -2,9 +2,10 @@
 
 var fs = require('fs'),
     os = require('os'),
-    program = require('commander'),
     pjson = require('../package.json'),
     path =  require('path');
+
+const commander = require('commander');
 
 var GVCP = require("../lib/classes/GVCP").GVCP;
 var imageing = require("../lib/imageing").imageing;
@@ -13,6 +14,8 @@ var imageing = require("../lib/imageing").imageing;
 function exdendedHelp(){
   console.log('setting mtu: sudo ifconfig eth1 mtu 3000');
 }
+
+const program = new commander.Command();
 
 program
     .version(pjson.version)
@@ -26,20 +29,22 @@ program
     .option('-h, --height [height]','height')
     .option('-i, --imageing','read images from camera')
     .option('-f, --interface [interface]','interface name (defaults to all)')
-    .on('--help',exdendedHelp)
-    .parse(process.argv);
+    .on('--help',exdendedHelp);
 
+program.parse(process.argv);
 
-if(program.imageing){
+const options = program.opts();
+
+if(options.imageing){
 //sudo ifconfig eth1 mtu 3000
-  var broadcast = program.broadcast || '127.0.0.255';
-  var mtu = program.mtu || 3000;
-  var prefix = program.prefix || './m';
-  var exposure = program.exposure || 1000;
-  var height = program.height || 128;
+  var broadcast = options.broadcast || '127.0.0.255';
+  var mtu = options.mtu || 3000;
+  var prefix = options.prefix || './m';
+  var exposure = options.exposure || 1000;
+  var height = options.height || 128;
 
   imageing(mtu,prefix,broadcast,exposure,height)
-}else if(program.discover){
+}else if(options.discover){
   var iFaces = os.networkInterfaces();
   var nameList = [];
 
@@ -48,8 +53,8 @@ if(program.imageing){
     if(index<list.length){
       var name = nameList[index];
 
-      if (program.interface){
-        if (program.interface===name){
+      if (options.interface){
+        if (options.interface===name){
           checkIFaces(name,iFaces[name],function(devices){
             console.log(devices);
             checkList(list,index+1);

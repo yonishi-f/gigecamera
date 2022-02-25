@@ -45,8 +45,7 @@ device.on('initializedServer',function(server){
 
   console.time('acquire image');
 
-  device.writeRegister( "0x40024",1, function(err,response){
-
+  device.writeRegister( "0xB004",1, function(err,response){
     if (err){
       throw new Error(err);
     }else{
@@ -58,7 +57,7 @@ device.on('initializedServer',function(server){
 
 
 console.time('discovering devices');
-device.gvcp.discover('192.168.192.255');
+device.gvcp.discover('192.168.0.255');
 
 
 
