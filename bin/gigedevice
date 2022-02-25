@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
-var fs = require('fs'),
-    os = require('os'),
-    pjson = require('../package.json'),
-    path =  require('path');
+var os = require('os'),
+    pjson = require('../package.json')
 
 const commander = require('commander');
 
